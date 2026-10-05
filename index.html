@@ -1,0 +1,442 @@
+```html
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>إلى براء ❤️</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at 50% 20%, #3b1b2a 0%, #170c13 45%, #080509 100%);
+      color: #fff;
+      font-family: Georgia, "Times New Roman", serif;
+      overflow-x: hidden;
+    }
+
+    .container {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 30px 20px;
+      position: relative;
+    }
+
+    /* نجوم صغيرة */
+    .stars {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .star {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: white;
+      border-radius: 50%;
+      opacity: 0.5;
+      animation: twinkle 3s infinite ease-in-out;
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: .15; }
+      50% { opacity: .8; }
+    }
+
+    .card {
+      width: 100%;
+      max-width: 560px;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .heart {
+      font-size: 48px;
+      margin-bottom: 25px;
+      animation: heartbeat 1.8s infinite;
+    }
+
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      15% { transform: scale(1.15); }
+      30% { transform: scale(1); }
+      45% { transform: scale(1.1); }
+    }
+
+    .intro {
+      animation: fadeIn 2s ease forwards;
+    }
+
+    .intro h1 {
+      font-size: 34px;
+      font-weight: normal;
+      margin-bottom: 15px;
+      letter-spacing: 1px;
+    }
+
+    .intro p {
+      color: #d8c6cc;
+      font-size: 16px;
+      line-height: 1.8;
+    }
+
+    .open-btn {
+      margin-top: 35px;
+      padding: 14px 34px;
+      border: 1px solid rgba(255,255,255,.3);
+      border-radius: 50px;
+      background: rgba(255,255,255,.08);
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      transition: .3s;
+      backdrop-filter: blur(10px);
+    }
+
+    .open-btn:hover {
+      background: rgba(255,255,255,.16);
+      transform: translateY(-2px);
+    }
+
+    .message {
+      display: none;
+      opacity: 0;
+    }
+
+    .message.show {
+      display: block;
+      animation: messageIn 1.5s ease forwards;
+    }
+
+    @keyframes messageIn {
+      from {
+        opacity: 0;
+        transform: translateY(25px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .message h2 {
+      font-size: 32px;
+      font-weight: normal;
+      margin-bottom: 30px;
+    }
+
+    .line {
+      opacity: 0;
+      transform: translateY(12px);
+      margin-bottom: 23px;
+      color: #f5e9ed;
+      font-size: 19px;
+      line-height: 2;
+    }
+
+    .line.visible {
+      animation: lineIn 1.2s ease forwards;
+    }
+
+    @keyframes lineIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .ending {
+      margin-top: 35px;
+      padding-top: 25px;
+      border-top: 1px solid rgba(255,255,255,.12);
+      opacity: 0;
+    }
+
+    .ending.show {
+      animation: fadeIn 2s ease forwards;
+    }
+
+    .ending p {
+      font-size: 21px;
+      line-height: 1.9;
+      color: #fff;
+    }
+
+    .signature {
+      margin-top: 30px;
+      font-size: 18px;
+      color: #cfa9b6;
+    }
+
+    .small-heart {
+      display: inline-block;
+      margin-top: 12px;
+      font-size: 25px;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    /* قلوب عائمة */
+    .floating-heart {
+      position: fixed;
+      bottom: -30px;
+      font-size: 18px;
+      opacity: 0;
+      pointer-events: none;
+      animation: floatUp 7s linear forwards;
+      z-index: 1;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) scale(.7);
+        opacity: 0;
+      }
+      15% {
+        opacity: .5;
+      }
+      80% {
+        opacity: .25;
+      }
+      100% {
+        transform: translateY(-110vh) scale(1.2);
+        opacity: 0;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .intro h1,
+      .message h2 {
+        font-size: 29px;
+      }
+
+      .line {
+        font-size: 18px;
+        line-height: 1.9;
+      }
+
+      .ending p {
+        font-size: 19px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="stars" id="stars"></div>
+
+  <div class="container">
+
+    <div class="card">
+
+      <!-- البداية -->
+      <div class="intro" id="intro">
+
+        <div class="heart">❤️</div>
+
+        <h1>إلى براء...</h1>
+
+        <p>
+          فيه كلام كان لازم أقولهولك...
+          <br>
+          بس المرة دي مش في رسالة عادية.
+        </p>
+
+        <button class="open-btn" onclick="openMessage()">
+          افتحي الرسالة
+        </button>
+
+      </div>
+
+
+      <!-- الرسالة -->
+      <div class="message" id="message">
+
+        <h2>بحبك يا براء ❤️</h2>
+
+        <div id="lines">
+
+          <p class="line">
+            أنا ما عنديش أغلى منك في حياتي،
+            وماقدرش أقعد كده وإنتِ زعلانة مني،
+            علشان أنا بحبك.
+          </p>
+
+          <p class="line">
+            أنا عاوزك تعرفي إن عمرك ما كنتِ شخص عادي بالنسبالي،
+            ولا في يوم كنتِ مجرد حد عابر في حياتي.
+          </p>
+
+          <p class="line">
+            أنا بحبك والله يا براء...
+            وبحبك أوي كمان.
+          </p>
+
+          <p class="line">
+            وعمري ما كنت في حياتي أتخيل إني أحب حد كده،
+            أو أتعلق بيه بالشكل ده...
+          </p>
+
+          <p class="line">
+            بس هو فعلًا الأرواح لمست بعض.
+          </p>
+
+          <p class="line">
+            مع إني ماكنتش متخيل إن حاجة زي دي ممكن تحصل،
+            بس حصلت...
+            وحصلت معاكي إنتِ.
+          </p>
+
+          <p class="line">
+            وعشان كده، مهما حصل بينا،
+            ومهما اختلفنا...
+            ماتزعليش مني.
+          </p>
+
+          <p class="line">
+            أنا مش عاوز أشوفك زعلانة مني،
+            ولا عاوز المسافة اللي بينا تخلي أي حاجة تضيع مننا.
+          </p>
+
+        </div>
+
+        <div class="ending" id="ending">
+
+          <p>
+            بحبك يا براء...
+            <br>
+            ودي يمكن أبسط حاجة أقدر أقولها،
+            <br>
+            بس هي أصدق حاجة جوايا.
+          </p>
+
+          <div class="signature">
+            ❤️
+            <br>
+            من شخص بيحبك بجد
+          </div>
+
+          <div class="small-heart">♡</div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <script>
+
+    // إنشاء النجوم
+    const starsContainer = document.getElementById("stars");
+
+    for (let i = 0; i < 70; i++) {
+
+      const star = document.createElement("div");
+
+      star.className = "star";
+
+      star.style.left = Math.random() * 100 + "%";
+      star.style.top = Math.random() * 100 + "%";
+
+      star.style.animationDelay =
+        Math.random() * 3 + "s";
+
+      starsContainer.appendChild(star);
+    }
+
+
+    // فتح الرسالة
+    function openMessage() {
+
+      document.getElementById("intro").style.display = "none";
+
+      const message = document.getElementById("message");
+
+      message.classList.add("show");
+
+      const lines =
+        document.querySelectorAll(".line");
+
+      lines.forEach((line, index) => {
+
+        setTimeout(() => {
+
+          line.classList.add("visible");
+
+        }, 900 + index * 1900);
+
+      });
+
+
+      // ظهور النهاية
+      const endingDelay =
+        900 + lines.length * 1900 + 1000;
+
+      setTimeout(() => {
+
+        document
+          .getElementById("ending")
+          .classList.add("show");
+
+      }, endingDelay);
+
+
+      // تشغيل القلوب
+      startHearts();
+    }
+
+
+    // قلوب عائمة
+    function startHearts() {
+
+      setInterval(() => {
+
+        const heart =
+          document.createElement("div");
+
+        heart.className =
+          "floating-heart";
+
+        heart.innerHTML =
+          Math.random() > .5 ? "♡" : "♥";
+
+        heart.style.left =
+          Math.random() * 100 + "%";
+
+        heart.style.animationDuration =
+          (5 + Math.random() * 4) + "s";
+
+        document.body.appendChild(heart);
+
+        setTimeout(() => {
+          heart.remove();
+        }, 9000);
+
+      }, 1000);
+
+    }
+
+  </script>
+
+</body>
+</html>
